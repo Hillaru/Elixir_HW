@@ -12,7 +12,7 @@ defmodule Serv do
     {:ok, pid} = MyXQL.start_link(username: "hillaru", database: "test_db", protocol: :tcp)
     {:ok, socket} =
       :gen_tcp.listen(port, [:binary, active: false, reuseaddr: true])
-    :erlang.register(db, pid)
+    :erlang.register(:db, pid)
     cycle(socket)
   end
 
@@ -48,23 +48,24 @@ defmodule Serv do
     :ok
   end
   defp generate_html("getallstaff", _) do
-    {:ok, data} = MyXQL.query(db, "SELECT * FROM staff")
+    {:ok, data} = MyXQL.query(:db, "SELECT * FROM staff")
     "<h1>All Staff data</h1><br><table>" <> output([data.columns, data.rows]) <> "</table>"
   end
   defp generate_html("getstaff", id) do
-    {:ok, data} = MyXQL.query(db, "SELECT * FROM staff WHERE Staff_id = ?", [id])
+    {:ok, data} = MyXQL.query(:db, "SELECT * FROM staff WHERE Staff_id = ?", [id])
     "<h1>Staffs with #{id} id data</h1><br><table>" <> output([data.columns, data.rows]) <> "</table>"
   end
   defp generate_html(_, _) do
     :error
   end
 
-  defp output([[id, fName, lName, patr, pass, phone] | data]) do
+  defp output([[id, fName, lName, patr, pass, phone] | [data]]) do
     string = "<tr><td><h4>#{id}</h4></td><td><h4>#{fName}</h4></td><td><h4>#{lName}</h4></td><td><h4>#{patr}</h4></td><td><h4>#{pass}</h4></td><td><h4>#{phone}</h4></td></tr>"
     output(string, data)
   end
   defp output(string, [[id, fName, lName, patr, pass, phone] | data]) do
-    string = string <> "<tr><td>#{id}</td><td>#{fName}</td><td>#{lName}</td><td>#{patr}</td><td>#{pass}</td><td>#{phone}</td></tr>"
+    new_string = string <> "<tr><td>#{id}</td><td>#{fName}</td><td>#{lName}</td><td>#{patr}</td><td>#{pass}</td><td>#{phone}</td></tr>"
+    output(new_string, data)
   end
   defp output(string, []) do
     string
