@@ -20,7 +20,7 @@ RUN set -xe \
 RUN git clone --branch test_branch https://github.com/Hillaru/Elixir_HW.git
 
 CMD cd Elixir_HW/hw3 && mix local.hex --force && mix local.rebar --force \
-&& mix deps.get && iex -S mix && Serv.main
+&& mix deps.get && mix escript.build && ./hw3
 
 
 
