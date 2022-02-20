@@ -17,9 +17,10 @@ RUN set -xe \
 	&& find /usr/local/src/elixir/ -type f -not -regex "/usr/local/src/elixir/lib/[^\/]*/lib.*" -exec rm -rf {} + \
 	&& find /usr/local/src/elixir/ -type d -depth -empty -delete
 
-RUN git clone https://github.com/Hillaru/Elixir_HW.git
+RUN git clone --branch test_branch https://github.com/Hillaru/Elixir_HW.git
 
-CMD cd Elixir_HW/hw3 && mix deps.get && iex -S mix && Serv.main
+CMD cd Elixir_HW/hw3 && mix local.hex --force && mix local.rebar --force \
+&& mix deps.get && iex -S mix && Serv.main
 
 
 

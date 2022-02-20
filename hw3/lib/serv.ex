@@ -7,7 +7,7 @@ defmodule Serv do
   Nothing.
   """
 
-  def main() do
+  def main(args \\ []) do
     port = 1480
     {:ok, pid} = MyXQL.start_link(username: "hillaru", database: "test_db", protocol: :tcp)
     {:ok, socket} =
