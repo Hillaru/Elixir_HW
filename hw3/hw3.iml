@@ -18,6 +18,7 @@
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/telemetry" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/connection" />
       <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/db_connection" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/json" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="myxql" level="project" />
@@ -31,5 +32,9 @@
     <orderEntry type="library" name="benchee" level="project" />
     <orderEntry type="library" name="connection" level="project" />
     <orderEntry type="library" name="telemetry" level="project" />
+    <orderEntry type="library" name="json" level="project" />
+    <orderEntry type="library" name="credo" level="project" />
+    <orderEntry type="library" name="dialyzex" level="project" />
+    <orderEntry type="library" name="excoveralls" level="project" />
   </component>
 </module>
